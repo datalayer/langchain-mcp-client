@@ -1,0 +1,56 @@
+// The configuration file format is [JSON5](https://json5.org/),
+// where comments and trailing commas are allowed.
+// The file format is further extended to replace `${...}` notations
+// with the values of corresponding environment variables.
+// Keep all the credentials and private into the `.env` file
+// and refer to them with `${...}` notation as needed.
+{
+    //"llm": {
+    //    "model_provider": "azure_openai",
+    //    "model": "gpt-4o",
+    //    "temperature": 0.0,
+    //    "max_tokens": 1000,
+    //    "system_prompt": "You are a helpful assistant.",
+    //},
+    // "llm": {
+    //    "model_provider": "github_copilot",
+    //    "model": "gpt-4o",
+    //    "temperature": 0.0,
+    //    "max_tokens": 1000,
+    //    "system_prompt": "You are a helpful assistant.",
+    //},
+     "llm": {
+        "model_provider": "bedrock",
+        "model": "anthropic.claude-3-sonnet-20240229-v1:0",
+        "temperature": 0.0,
+        "max_tokens": 1000,
+        "system_prompt": "You are a helpful assistant.",
+        // https://www.gettingstarted.ai/langchain-bedrock/
+    },
+    "example_queries": [
+        "Hello",
+        "Create a pandas example in my notebook",
+    ],
+    "mcp_servers": {
+    "jupyter": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "SERVER_URL",
+        "-e",
+        "TOKEN",
+        "-e",
+        "NOTEBOOK_PATH",
+        "datalayer/jupyter-mcp-server:latest"
+      ],
+      "env": {
+        "SERVER_URL": "http://host.docker.internal:8888",
+        "TOKEN": "MY_TOKEN",
+        "NOTEBOOK_PATH": "notebook.ipynb"
+      }
+    }
+  }
+}
