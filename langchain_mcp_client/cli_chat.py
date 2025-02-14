@@ -39,7 +39,7 @@ except ImportError as e:
     sys.exit(1)
 
 # Local application imports
-from config_loader import load_config
+from langchain_mcp_client.config_loader import load_config
 
 # Type definitions
 ConfigType = Dict[str, Any]
