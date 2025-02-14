@@ -14,7 +14,7 @@
 [![PyPI - Version](https://img.shields.io/pypi/v/langchain-mcp-client)](https://pypi.org/project/langchain-mcp-client)
 
 This simple [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-client demonstrates the use of MCP server tools by LangChain ReAct Agent. This is an adaption from [hideya/mcp-client-langchain-py](https://github.com/hideya/mcp-client-langchain-py).
+client demonstrates the use of MCP server tools by LangChain ReAct Agent.
 - 🌐 Seamlessly connect to any MCP servers.
 - 🤖 Use any LangChain-compatible LLM for flexible model selection.
 - 💬 Interact via CLI, enabling dynamic conversations.
@@ -32,7 +32,7 @@ and converts their available tools into a list of LangChain-compatible tools
 The python version should be 3.11 or higher.
 
 ```bash
-python langchain_mcp_client
+pip install langchain_mcp_client
 ```
 
 ## Configuration
@@ -54,3 +54,7 @@ langchain-mcp-client
 Below an example with [jupyter-mcp-server](https://github.com/datalayer/jupyter-mcp-server):
 
 ![](https://assets.datalayer.tech/jupyter-mcp/jupyter-mcp-server-cli.gif)
+
+## Credits
+
+This initial code of this repo is taken from  from [hideya/mcp-client-langchain-py](https://github.com/hideya/mcp-client-langchain-py) (MIT License).
