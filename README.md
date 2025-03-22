@@ -21,9 +21,7 @@ This simple [Model Context Protocol (MCP)](https://modelcontextprotocol.io) clie
 
 ## Conversion to LangChain Tools
 
-It leverages a utility function `convert_mcp_to_langchain_tools()` from [`langchain_mcp_tools`](https://pypi.org/project/langchain-mcp-tools/).  
-
-This function handles parallel initialization of specified multiple MCP servers and converts their available tools into a list of LangChain-compatible tools ([List[BaseTool]](https://python.langchain.com/api_reference/core/tools/langchain_core.tools.base.BaseTool.html#langchain_core.tools.base.BaseTool)).
+It leverages a utility function `convert_mcp_to_langchain_tools()`. This function handles parallel initialization of specified multiple MCP servers and converts their available tools into a list of LangChain-compatible tools ([List[BaseTool]](https://python.langchain.com/api_reference/core/tools/langchain_core.tools.base.BaseTool.html#langchain_core.tools.base.BaseTool)).
 
 ## Installation
 
@@ -45,7 +43,7 @@ Configure the LLM, MCP servers, and prompt example in the `llm_mcp_config.json5`
 
 ## Usage
 
-Below an example with [jupyter-mcp-server](https://github.com/datalayer/jupyter-mcp-server):
+Below an example with a [Jupyter MCP Server](https://github.com/datalayer/jupyter-mcp-server):
 
 Check the `llm_mcp_config.json5` configuration (commands depends if you are running on Linux or macOS/Windows).
 
@@ -63,4 +61,4 @@ make cli
 
 ## Credits
 
-This initial code of this repo is taken from  from [hideya/mcp-client-langchain-py](https://github.com/hideya/mcp-client-langchain-py) (MIT License).
+This initial code of this repo is taken from [hideya/mcp-client-langchain-py](https://github.com/hideya/mcp-client-langchain-py) (MIT License) and from [`langchain_mcp_tools`](https://github.com/hideya/langchain-mcp-tools-py) (MIT License).
