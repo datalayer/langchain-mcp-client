@@ -13,19 +13,17 @@
 [![Github Actions Status](https://github.com/datalayer/langchain-mcp-client/workflows/Build/badge.svg)](https://github.com/datalayer/langchain-mcp-client/actions/workflows/build.yml)
 [![PyPI - Version](https://img.shields.io/pypi/v/langchain-mcp-client)](https://pypi.org/project/langchain-mcp-client)
 
-This simple [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-client demonstrates the use of MCP server tools by LangChain ReAct Agent.
+This simple [Model Context Protocol (MCP)](https://modelcontextprotocol.io) client demonstrates the use of MCP server tools by LangChain ReAct Agent.
+
 - 🌐 Seamlessly connect to any MCP servers.
 - 🤖 Use any LangChain-compatible LLM for flexible model selection.
 - 💬 Interact via CLI, enabling dynamic conversations.
 
 ## Conversion to LangChain Tools
 
-It leverages a utility function `convert_mcp_to_langchain_tools()` from
-[`langchain_mcp_tools`](https://pypi.org/project/langchain-mcp-tools/).  
-This function handles parallel initialization of specified multiple MCP servers
-and converts their available tools into a list of LangChain-compatible tools
-([List[BaseTool]](https://python.langchain.com/api_reference/core/tools/langchain_core.tools.base.BaseTool.html#langchain_core.tools.base.BaseTool)).
+It leverages a utility function `convert_mcp_to_langchain_tools()` from [`langchain_mcp_tools`](https://pypi.org/project/langchain-mcp-tools/).  
+
+This function handles parallel initialization of specified multiple MCP servers and converts their available tools into a list of LangChain-compatible tools ([List[BaseTool]](https://python.langchain.com/api_reference/core/tools/langchain_core.tools.base.BaseTool.html#langchain_core.tools.base.BaseTool)).
 
 ## Installation
 
@@ -47,11 +45,19 @@ Configure the LLM, MCP servers, and prompt example in the `llm_mcp_config.json5`
 
 ## Usage
 
+Below an example with [jupyter-mcp-server](https://github.com/datalayer/jupyter-mcp-server):
+
+Check the `llm_mcp_config.json5` configuration (commands depends if you are running on Linux or macOS/Windows).
+
 ```bash
-langchain-mcp-client
+# Start jupyterlab.
+make jupyterlab
 ```
 
-Below an example with [jupyter-mcp-server](https://github.com/datalayer/jupyter-mcp-server):
+```bash
+# Launch the CLI.
+make cli
+```
 
 ![](https://assets.datalayer.tech/jupyter-mcp/jupyter-mcp-server-cli.gif)
 

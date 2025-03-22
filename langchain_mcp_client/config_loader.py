@@ -1,5 +1,11 @@
-import pyjson5 as json5
+# Copyright (c) 2023-2024 Datalayer, Inc.
+#
+# BSD 3-Clause License
+
 from pathlib import Path
+
+import pyjson5 as json5
+
 from typing import TypedDict, Optional, Any
 
 
@@ -32,8 +38,6 @@ def load_config(config_path: str):
     config_file = Path(config_path)
     if not config_file.exists():
         raise ConfigFileNotFoundError(f"Config file {config_path} not found")
-
     with open(config_file, 'r', encoding='utf-8') as f:
         config: dict[str, Any] = json5.load(f)
-
     return config
