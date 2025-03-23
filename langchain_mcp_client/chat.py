@@ -6,7 +6,7 @@ import argparse
 import asyncio
 import json
 import logging
-import sys
+
 from pathlib import Path
 from enum import Enum
 
@@ -18,29 +18,25 @@ from typing import (
     cast,
 )
 
-try:
-    from dotenv import load_dotenv
-    from langchain.chat_models import init_chat_model
-    from langchain.schema import (
-        AIMessage,
-        BaseMessage,
-        HumanMessage,
-        SystemMessage,
-    )
-    from langchain_core.runnables.base import Runnable
-    from langchain_core.messages.tool import ToolMessage
-    from langgraph.prebuilt import create_react_agent
-    from langchain_github_copilot import ChatGitHubCopilot
-except ImportError as e:
-    print(f'\nError: Required package not found: {e}')
-    print('Please ensure all required packages are installed\n')
-    sys.exit(1)
+from dotenv import load_dotenv
 
+from langchain.chat_models import init_chat_model
+from langchain.schema import (
+    AIMessage,
+    BaseMessage,
+    HumanMessage,
+    SystemMessage,
+)
+from langchain_core.runnables.base import Runnable
+from langchain_core.messages.tool import ToolMessage
 from langchain_mcp_client.config_loader import load_config
 from langchain_mcp_client.mcp_tools import (
     convert_mcp_to_langchain_tools,
     McpServerCleanupFn,
 )
+from langchain_github_copilot import ChatGitHubCopilot
+
+from langgraph.prebuilt import create_react_agent
 
 
 ConfigType = Dict[str, Any]

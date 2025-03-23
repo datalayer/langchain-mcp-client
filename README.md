@@ -57,6 +57,12 @@ make jupyterlab
 make cli
 ```
 
+This is a prompt example.
+
+```
+create matplolib examples with many variants in jupyter
+```
+
 ![](https://assets.datalayer.tech/jupyter-mcp/jupyter-mcp-server-cli.gif)
 
 ## Credits

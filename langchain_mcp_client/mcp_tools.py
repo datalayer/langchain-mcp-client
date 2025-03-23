@@ -2,14 +2,18 @@
 #
 # BSD 3-Clause License
 
+import logging
+import os
+
 from anyio.streams.memory import (
     MemoryObjectReceiveStream,
     MemoryObjectSendStream,
 )
-import logging
-import os
-import sys
-from contextlib import AsyncExitStack, asynccontextmanager
+from contextlib import (
+    asynccontextmanager,
+    AsyncExitStack,
+)
+
 from typing import (
     Any,
     Awaitable,
@@ -22,18 +26,14 @@ from typing import (
     Type,
     TypeAlias,
 )
+from pydantic import BaseModel
+from jsonschema_pydantic import jsonschema_to_pydantic
 
-try:
-    from jsonschema_pydantic import jsonschema_to_pydantic
-    from langchain_core.tools import BaseTool, ToolException
-    from mcp import ClientSession, StdioServerParameters
-    from mcp.client.stdio import stdio_client
-    import mcp.types as mcp_types
-    from pydantic import BaseModel
-except ImportError as e:
-    print(f'\nError: Required package not found: {e}')
-    print('Please ensure all required packages are installed\n')
-    sys.exit(1)
+from langchain_core.tools import BaseTool, ToolException
+
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+import mcp.types as mcp_types
 
 
 def fix_schema(schema: dict) -> dict:
@@ -59,8 +59,7 @@ async def spawn_mcp_server_and_get_transport(
     exit_stack: AsyncExitStack,
     logger: logging.Logger = logging.getLogger(__name__)
 ) -> StdioTransport:
-    """
-    Spawns an MCP server process and establishes communication channels.
+    """Spawns an MCP server process and establishes communication channels.
 
     Args:
         server_name: Server instance name to use for better logging
@@ -75,8 +74,7 @@ async def spawn_mcp_server_and_get_transport(
         Exception: If server spawning fails
     """
     try:
-        logger.info(f'MCP server "{server_name}": '
-                    f'initializing with: {server_config}')
+        logger.info(f'MCP server "{server_name}": ' f'initializing with: {server_config}')
 
         # NOTE: `uv` and `npx` seem to require PATH to be set.
         # To avoid confusion, it was decided to automatically append it
@@ -109,8 +107,7 @@ async def get_mcp_server_tools(
     exit_stack: AsyncExitStack,
     logger: logging.Logger = logging.getLogger(__name__)
 ) -> List[BaseTool]:
-    """
-    Retrieves and converts MCP server tools to LangChain format.
+    """Retrieves and converts MCP server tools to LangChain format.
 
     Args:
         server_name: Server instance name to use for better logging

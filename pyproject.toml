@@ -28,6 +28,7 @@ dependencies = [
     "langchain-groq>=0.2.3",
     "langchain-openai>=0.3.0",
     "langchain>=0.3.14",
+    "langgraph>=0.2.62",
     "mcp>=1.2.0",
     "pyjson5>=1.6.8",
     "pympler>=1.1",

@@ -33,8 +33,7 @@ class ConfigValidationError(ConfigError):
 
 
 def load_config(config_path: str):
-    """Load and validate configuration from JSON5 file.
-    """
+    """Load and validate configuration from JSON5 file."""
     config_file = Path(config_path)
     if not config_file.exists():
         raise ConfigFileNotFoundError(f"Config file {config_path} not found")
