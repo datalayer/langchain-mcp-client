@@ -22,18 +22,17 @@ classifiers = [
 ]
 dependencies = [
     "jsonschema-pydantic>=0.6",
-    "langchain-mcp-tools>=0.1.5",
-    "langchain>=0.3.14",
     "langchain-anthropic>=0.3.1",
+    "langchain-aws",
+    "langchain-github-copilot",
     "langchain-groq>=0.2.3",
     "langchain-openai>=0.3.0",
+    "langchain>=0.3.14",
     "langgraph>=0.2.62",
     "mcp>=1.2.0",
     "pyjson5>=1.6.8",
     "pympler>=1.1",
     "python-dotenv>=1.0.1",
-    "langchain-github-copilot",
-    "langchain-aws"
 ]
 
 [project.optional-dependencies]
@@ -45,7 +44,7 @@ typing = ["mypy>=0.990"]
 file = "LICENSE"
 
 [project.scripts]
-langchain-mcp-client = "langchain_mcp_client.cli_chat:main"
+langchain-mcp-client = "langchain_mcp_client.chat:main"
 
 [project.urls]
 Home = "https://github.com/datalayer/langchain-mcp-client"

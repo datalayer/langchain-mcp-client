@@ -2,6 +2,6 @@
 #
 # BSD 3-Clause License
 
-"""Langchain MCP Client."""
+"""LangChain MCP Client."""
 
 __all__ = []

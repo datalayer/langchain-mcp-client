@@ -1,11 +1,15 @@
-# Standard library imports
+# Copyright (c) 2023-2024 Datalayer, Inc.
+#
+# BSD 3-Clause License
+
 import argparse
 import asyncio
-from enum import Enum
 import json
 import logging
-import sys
+
 from pathlib import Path
+from enum import Enum
+
 from typing import (
     List,
     Optional,
@@ -14,38 +18,30 @@ from typing import (
     cast,
 )
 
-# Third-party imports
-try:
-    from dotenv import load_dotenv
-    from langchain.chat_models import init_chat_model
-    from langchain.schema import (
-        AIMessage,
-        BaseMessage,
-        HumanMessage,
-        SystemMessage,
-    )
-    from langchain_core.runnables.base import Runnable
-    from langchain_core.messages.tool import ToolMessage
-    from langgraph.prebuilt import create_react_agent
-    from langchain_mcp_tools import (
-        convert_mcp_to_langchain_tools,
-        McpServerCleanupFn,
-    )
-    from langchain_github_copilot import ChatGithubCopilot
+from dotenv import load_dotenv
 
-except ImportError as e:
-    print(f'\nError: Required package not found: {e}')
-    print('Please ensure all required packages are installed\n')
-    sys.exit(1)
-
-# Local application imports
+from langchain.chat_models import init_chat_model
+from langchain.schema import (
+    AIMessage,
+    BaseMessage,
+    HumanMessage,
+    SystemMessage,
+)
+from langchain_core.runnables.base import Runnable
+from langchain_core.messages.tool import ToolMessage
 from langchain_mcp_client.config_loader import load_config
+from langchain_mcp_client.mcp_tools import (
+    convert_mcp_to_langchain_tools,
+    McpServerCleanupFn,
+)
+from langchain_github_copilot import ChatGitHubCopilot
 
-# Type definitions
+from langgraph.prebuilt import create_react_agent
+
+
 ConfigType = Dict[str, Any]
 
 
-# ANSI color escape codes
 class Colors(str, Enum):
     YELLOW = '\033[33m'  # color to yellow
     CYAN = '\033[36m'    # color to cyan
@@ -104,13 +100,13 @@ async def get_user_query(remaining_queries: List[str]) -> Optional[str]:
     """Get user input or next example query, handling empty inputs
     and quit commands."""
     set_color(Colors.YELLOW)
-    query = input('Query: ').strip()
+    prompt = input('Prompt: ').strip()
 
-    if len(query) == 0:
+    if len(prompt) == 0:
         if len(remaining_queries) > 0:
-            query = remaining_queries.pop(0)
+            prompt = remaining_queries.pop(0)
             clear_line()
-            print_colored(f'Example Query: {query}', Colors.YELLOW)
+            print_colored(f'Example Query: {prompt}', Colors.YELLOW)
         else:
             set_color(Colors.RESET)
             print('\nPlease type a query, or "quit" or "q" to exit\n')
@@ -118,11 +114,11 @@ async def get_user_query(remaining_queries: List[str]) -> Optional[str]:
 
     print(Colors.RESET)  # Reset after input
 
-    if query.lower() in ['quit', 'q']:
+    if prompt.lower() in ['quit', 'q']:
         print_colored('Goodbye!\n', Colors.CYAN)
         return None
 
-    return query
+    return prompt
 
 
 async def handle_conversation(
@@ -215,11 +211,9 @@ async def init_react_agent(
     model_provider = llm_config['model_provider']
     
     if model_provider == 'github_copilot':
+        llm = ChatGitHubCopilot(model=llm_config['model'], temperature=llm_config['temperature'], max_tokens=llm_config['max_tokens'])
         
-        llm = ChatGithubCopilot(model=llm_config['model'], temperature=llm_config['temperature'], max_tokens=llm_config['max_tokens'])
-        
-    else:
-    
+    else:    
         llm = init_chat_model(
             model=llm_config['model'],
             model_provider=llm_config['model_provider'],
@@ -261,16 +255,13 @@ async def run() -> None:
             if config.get('example_queries') is not None
             else []
         )
-
         agent, messages, mcp_cleanup = await init_react_agent(config, logger)
-
         await handle_conversation(
             agent,
             messages,
             example_queries,
             args.verbose
         )
-
     finally:
         if mcp_cleanup is not None:
             await mcp_cleanup()
