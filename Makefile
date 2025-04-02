@@ -39,3 +39,12 @@ jupyterlab:
 
 cli:
 	langchain-mcp-client
+
+
+publish-pypi: # publish the pypi package
+	git clean -fdx && \
+		python -m build
+	@exec echo
+	@exec echo twine upload ./dist/*-py3-none-any.whl
+	@exec echo
+	@exec echo https://pypi.org/project/langchain-mcp-client/#history
