@@ -50,7 +50,7 @@ module.exports = {
           'aria-label': 'LinkedIn',
         },
         {
-          href: 'https://bsky.app/profile/datalayer.io',
+          href: 'https://bsky.app/profile/datalayer.ai',
           position: 'right',
           className: 'header-bluesky-link',
           'aria-label': 'Bluesky',
@@ -90,7 +90,7 @@ module.exports = {
             },
             {
               label: 'Bluesky',
-              href: 'https://assets.datalayer.tech/logos-social-grey/youtube.svg',
+              href: 'https://assets.datalayer.tech/logos-social-grey/bluesky.svg',
             },
             {
               label: 'LinkedIn',
@@ -103,19 +103,7 @@ module.exports = {
           items: [
             {
               label: 'Datalayer',
-              href: 'https://datalayer.io',
-            },
-            {
-              label: 'Datalayer Docs',
-              href: 'https://docs.datalayer.app',
-            },
-            {
-              label: 'Datalayer Tech',
-              href: 'https://datalayer.tech',
-            },
-            {
-              label: 'Datalayer Guide',
-              href: 'https://datalayer.guide',
+              href: 'https://datalayer.ai',
             },
             {
               label: 'Datalayer Blog',
